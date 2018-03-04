@@ -5,7 +5,7 @@
     apt-get install -y python python-pip
     apt-get install -y python3 python3-pip
     
-	# nodejs
+	# nodejs & npm
     if [ ! -f /usr/bin/nodejs ]; then
         curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
         apt-get install -y nodejs
@@ -31,15 +31,9 @@
 	apt-get install -y docker-ce
 	systemctl status docker
 	
-	'''
-	usermod -aG docker ${USER}
-	usermod -aG docker vagrant
-	usermod -aG docker jenkins
-	'''
-    
-	usermod -aG sudo ${USER}
-	usermod -aG sudo vagrant
-	usermod -aG sudo jenkins
+	usermod -a -G docker ${USER}
+	usermod -a -G docker vagrant
+	usermod -a -G docker jenkins
 	
 	service jenkins restart
     	
@@ -49,10 +43,10 @@
 		jk_pwd=$(cat /var/lib/jenkins/secrets/initialAdminPassword)
     fi
 	
-	echo "============= JENKINS USER ==============="	
-	echo $jk_usr
-    echo $jk_pwd
-	echo "=========================================="
+	echo "============= JENKINS USER & PWD ==============="	
+	echo "$jk_usr"
+    echo "$jk_pwd"
+	echo "================================================"
 	
 	
 	
